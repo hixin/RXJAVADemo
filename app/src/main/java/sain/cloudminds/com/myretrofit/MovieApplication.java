@@ -1,6 +1,7 @@
 package sain.cloudminds.com.myretrofit;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -13,6 +14,7 @@ import java.io.File;
 public class MovieApplication extends Application{
     private static int MEMORY_SIZE = 20 * 1024 * 1024;
     private static final int DISK_SIZE = 20 * 1024 * 1024;
+    private static Context instance;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -31,5 +33,11 @@ public class MovieApplication extends Application{
                 .build();
 
         ImageLoader.getInstance().init(configuration);
+        instance = getApplicationContext();
     }
+
+    public static Context getContext() {
+        return instance;
+    }
+
 }
